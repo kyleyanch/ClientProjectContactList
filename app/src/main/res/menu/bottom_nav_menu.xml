@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/addEmail"
+        android:icon="@drawable/round_email_24"
+        android:id="@+id/navEmail"/>
+    <item android:title="@string/contactList"
+        android:icon="@drawable/round_contacts_24"
+        android:id="@+id/navList"/>
+    <item android:title="@string/addPhone"
+        android:icon="@drawable/round_contact_phone_24"
+        android:id="@+id/navPhone"/>
+</menu>

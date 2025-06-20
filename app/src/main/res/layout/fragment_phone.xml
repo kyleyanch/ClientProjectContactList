@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10sp"
+        >
+
+        <TextView
+            android:id="@+id/addPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addPhone"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:layout_marginVertical="30sp"
+
+            />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+
+            />
+
+        <TextView
+            android:id="@+id/contactNamePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contactName"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginVertical="10sp"/>
+
+        <EditText
+            android:id="@+id/cNamePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/enterName"
+            android:layout_marginStart="20sp"
+            android:layout_marginVertical="10sp"
+            />
+
+        <TextView
+            android:id="@+id/contactEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phoneNumber"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginVertical="10sp"
+            />
+
+        <EditText
+            android:id="@+id/cEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/enterNumber"
+            android:layout_marginStart="20sp"
+            android:layout_marginVertical="10sp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </LinearLayout>
+</FrameLayout>
