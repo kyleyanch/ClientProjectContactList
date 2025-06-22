@@ -11,16 +11,6 @@ import android.widget.Toast
 import com.example.clientprojectcontactlist.Model.Contact
 import com.example.clientprojectcontactlist.Model.ContactType
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EmailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EmailFragment : Fragment() {
 
     override fun onCreateView(
@@ -36,9 +26,9 @@ class EmailFragment : Fragment() {
 
         val contactNameInput = view.findViewById<EditText>(R.id.cEmailName)
         val contactEmailInput = view.findViewById<EditText>(R.id.cEmailAddress)
-        val subitEmailBtn = view.findViewById<EditText>(R.id.emailSubmitBtn)
+        val submitEmailBtn = view.findViewById<Button>(R.id.emailSubmitBtn)
 
-        subitEmailBtn.setOnClickListener{
+        submitEmailBtn.setOnClickListener{
             val contactName = contactNameInput.text.toString().trim()
             val contactEmail = contactEmailInput.text.toString().trim()
 
@@ -52,6 +42,11 @@ class EmailFragment : Fragment() {
                 info = contactEmail,
                 type = ContactType.Email
             )
+
+            val emailActivity = activity
+            if (emailActivity is MainActivity){
+                emailActivity.addContact(contacts)
+            }
 
             contactNameInput.text.clear()
             contactEmailInput.text.clear()

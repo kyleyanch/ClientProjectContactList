@@ -5,21 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.clientprojectcontactlist.Model.Contact
 import com.example.clientprojectcontactlist.Model.ContactType
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PhoneFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PhoneFragment : Fragment() {
 
     override fun onCreateView(
@@ -35,9 +26,9 @@ class PhoneFragment : Fragment() {
 
         val contactNameInput = view.findViewById<EditText>(R.id.cNamePhone)
         val contactPhoneInput = view.findViewById<EditText>(R.id.cPhoneNum)
-        val subitPhoneBtn = view.findViewById<EditText>(R.id.phoneSubmitBtn)
+        val submitPhoneBtn = view.findViewById<Button>(R.id.phoneSubmitBtn)
 
-        subitPhoneBtn.setOnClickListener{
+        submitPhoneBtn.setOnClickListener{
             val contactName = contactNameInput.text.toString().trim()
             val contactPhone = contactPhoneInput.text.toString().trim()
 
@@ -51,6 +42,12 @@ class PhoneFragment : Fragment() {
                 info = contactPhone,
                 type = ContactType.Phone
             )
+
+            val phoneActivity = activity
+            if (phoneActivity is MainActivity){
+                phoneActivity.addContact(contacts)
+            }
+
 
             contactNameInput.text.clear()
             contactPhoneInput.text.clear()
