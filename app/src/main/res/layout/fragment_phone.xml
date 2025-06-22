@@ -80,6 +80,9 @@
             android:id="@+id/phoneSubmitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/SubmitBtn" />
+            android:text="@string/SubmitBtn"
+            android:backgroundTint="@color/grey"
+
+            />
     </LinearLayout>
 </FrameLayout>

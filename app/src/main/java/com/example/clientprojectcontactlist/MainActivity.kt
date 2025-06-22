@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
+
     private val contactList = mutableListOf<Contact>()
     private lateinit var contactFragment: ContactFragment
 
@@ -25,16 +26,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize fragment
+        // Initialize contact fragment
         contactFragment = ContactFragment()
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, contactFragment)
-                .commit()
-        }
+        // Load saved contacts from preferences
+        loadContactsFromPrefs()
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+        // Always set navList as the selected item to start on Contact List
+        bottomNav.selectedItemId = R.id.navList
+
+        // Fragment selection listener
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navEmail -> {
@@ -43,14 +46,12 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-
                 R.id.navPhone -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, PhoneFragment())
                         .commit()
                     true
                 }
-
                 R.id.navList -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, contactFragment)
@@ -58,9 +59,13 @@ class MainActivity : AppCompatActivity() {
                     contactFragment.setContacts(contactList)
                     true
                 }
-
                 else -> false
             }
+        }
+
+        // Load default fragment only if it's first boot
+        if (savedInstanceState == null) {
+            bottomNav.selectedItemId = R.id.navList
         }
     }
 
@@ -97,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             contactList.clear()
             contactList.addAll(savedList)
 
-            // Safely update fragment if it's visible
+            // If fragment is already visible, update it
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
             if (currentFragment is ContactFragment) {
                 currentFragment.setContacts(contactList)
