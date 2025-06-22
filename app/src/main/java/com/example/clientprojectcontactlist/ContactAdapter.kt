@@ -1,5 +1,7 @@
 package com.example.clientprojectcontactlist
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,26 +27,35 @@ class ContactAdapter (private val dataSet: List<Contact>) : RecyclerView.Adapter
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = dataSet.size ?: 0
+    override fun getItemCount() = dataSet.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val contact = dataSet?.get(position)
-        if(contact != null){
-            holder.nameTxt.text = contact.name
-            holder.detailsTxt.text = contact.info
+        val contact = dataSet[position]
+        holder.nameTxt.text = contact.name
+        holder.detailsTxt.text = contact.info
 
-            val imgIcon: Int
+        val context = holder.itemView.context
+        val imgIcon: Int
 
-            if(contact.type == ContactType.Email){
-                imgIcon = R.drawable.round_email_24
+        if (contact.type == ContactType.Email) {
+            imgIcon = R.drawable.round_email_24
+            holder.itemView.setOnClickListener {
+                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:${contact.info}")
+                }
+                context.startActivity(emailIntent)
             }
-            else{
-                imgIcon = R.drawable.round_contacts_24
+        } else {
+            imgIcon = R.drawable.round_contacts_24
+            holder.itemView.setOnClickListener {
+                val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:${contact.info}")
+                }
+                context.startActivity(dialIntent)
             }
-
-            holder.img.setImageResource(imgIcon)
-
         }
+
+        holder.img.setImageResource(imgIcon)
     }
 
 

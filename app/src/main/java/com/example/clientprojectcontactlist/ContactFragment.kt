@@ -15,13 +15,15 @@ class ContactFragment : Fragment() {
     private val contactList = mutableListOf<Contact>()
     private lateinit var adapter: ContactAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_contact, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val recyclerView = view.findViewById<RecyclerView>(R.id.contactList)
         adapter = ContactAdapter(contactList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -29,13 +31,17 @@ class ContactFragment : Fragment() {
     }
 
     fun setContacts(newListContact: List<Contact>) {
-        val oldSize = contactList.size
+        contactList.clear()
         contactList.addAll(newListContact)
-        adapter.notifyItemRangeInserted(oldSize, newListContact.size)
+        if (::adapter.isInitialized) {
+            adapter.notifyDataSetChanged()
+        }
     }
 
-    fun addOneContact(contact: Contact){
+    fun addOneContact(contact: Contact) {
         contactList.add(contact)
-        adapter.notifyItemInserted(contactList.size -1)
+        if (::adapter.isInitialized) {
+            adapter.notifyItemInserted(contactList.size - 1)
+        }
     }
 }
