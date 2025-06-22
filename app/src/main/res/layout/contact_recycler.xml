@@ -44,7 +44,7 @@
         />
 
     <TextView
-        android:id="@+id/testOutputView"
+        android:id="@+id/detailedOutputView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/testOutput"
@@ -61,7 +61,7 @@
         app:srcCompat="@drawable/round_contacts_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/testOutputView"
+        app:layout_constraintStart_toEndOf="@id/detailedOutputView"
         app:layout_constraintBottom_toTopOf="@id/divider"
         />
 

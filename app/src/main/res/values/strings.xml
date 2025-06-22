@@ -15,4 +15,5 @@
     <string name="details">Details: </string>
     <string name="nameOutput">Test Name</string>
     <string name="testOutput">name or email</string>
+    <string name="SubmitBtn">Submit</string>
 </resources>

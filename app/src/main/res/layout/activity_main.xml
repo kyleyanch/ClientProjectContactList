@@ -8,20 +8,54 @@
     tools:context=".MainActivity">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10sp"
+        >
 
+        <TextView
+            android:id="@+id/addEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contactList"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:layout_marginVertical="30sp"
+
+            />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/contact_recycler"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            />
+
+    </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"/>
-
-
-
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        android:name="com.example.clientprojectcontactlist.ContactFragment"
+        tools:layout="@layout/fragment_contact" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,4 +66,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
