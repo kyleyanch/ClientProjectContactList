@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import com.example.clientprojectcontactlist.Model.Contact
+import com.example.clientprojectcontactlist.Model.ContactType
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,17 +21,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PhoneFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,23 +30,30 @@ class PhoneFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_phone, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PhoneFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PhoneFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+
+        val contactNameInput = view.findViewById<EditText>(R.id.cNamePhone)
+        val contactPhoneInput = view.findViewById<EditText>(R.id.cPhoneNum)
+        val subitPhoneBtn = view.findViewById<EditText>(R.id.phoneSubmitBtn)
+
+        subitPhoneBtn.setOnClickListener{
+            val contactName = contactNameInput.text.toString().trim()
+            val contactPhone = contactPhoneInput.text.toString().trim()
+
+            if(contactName.isEmpty() || contactPhone.isEmpty()){
+                Toast.makeText(requireContext(), "Field cannot be empty.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            val contacts = Contact(
+                name = contactName,
+                info = contactPhone,
+                type = ContactType.Phone
+            )
+
+            contactNameInput.text.clear()
+            contactPhoneInput.text.clear()
+        }
     }
 }
